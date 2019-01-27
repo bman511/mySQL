@@ -61,3 +61,31 @@ USE sakila;
 UPDATE actor
 SET first_name = 'HARPO'
 WHERE first_name = 'GROUCHO' AND last_name='WILLIAMS';
+
+#4d
+USE sakila;
+UPDATE actor
+SET first_name = 'GROUCHO'
+WHERE first_name = 'HARPO';
+
+#5a
+SHOW CREATE TABLE address;
+
+#6a
+SELECT first_name, last_name, address
+FROM staff
+JOIN address
+USING(address_id);
+
+#6b
+USE sakila;
+SELECT first_name, last_name, SUM(amount) as 'Total', payment_date
+FROM payment
+JOIN staff
+USING(staff_id)
+WHERE payment_date LIKE '2005-08%'
+GROUP BY last_name;
+
+
+
+
