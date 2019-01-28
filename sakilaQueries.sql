@@ -193,9 +193,52 @@ JOIN staff
 JOIN payment
 	USING(staff_id)
 GROUP BY store_id
-ORDER BY SUM(amount) DESC
+ORDER BY SUM(amount) DESC;
 
 #7g
+SELECT store_id, city, country
+FROM store
+JOIN address 
+    USING(address_id)
+JOIN city
+    USING(city_id)
+JOIN country
+    USING(country_id);
 
+#7h
+SELECT name, SUM(amount)
+FROM category
+JOIN film_category 
+    USING(category_id)
+JOIN inventory
+    USING(film_id)
+JOIN rental
+    USING(inventory_id)
+JOIN payment
+    USING(rental_id)
+GROUP BY name
+ORDER BY SUM(amount) DESC
+LIMIT 5;
 
+#8a
+CREATE VIEW top_five_genres AS
+SELECT name, SUM(amount)
+FROM category
+JOIN film_category 
+    USING(category_id)
+JOIN inventory
+    USING(film_id)
+JOIN rental
+    USING(inventory_id)
+JOIN payment
+    USING(rental_id)
+GROUP BY name
+ORDER BY SUM(amount) DESC
+LIMIT 5;
 
+#8b
+#Use the view created above
+SELECT * FROM top_five_genres;
+
+#8c
+DROP VIEW top_five_genres;
